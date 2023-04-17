@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +26,30 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(newCategory);
         }
     }
+
+    @PostMapping("/category")
+    public ResponseEntity<CategoryData> update(@RequestBody CategoryData categoryData){
+        CategoryData newCategory = new CategoryData();
+        try {
+            newCategory = categoryService.update(categoryData);
+            return ResponseEntity.ok(newCategory);
+        }
+        catch(Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(newCategory);
+        }
+    }
+
+    @DeleteMapping("/category/categoryId")
+    public ResponseEntity<Integer> delete(@PathVariable int categoryId){
+        try {
+            categoryService.delete(categoryId);
+            return ResponseEntity.ok(categoryId);
+        }
+        catch(Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(categoryId);
+        }
+    }
+
 
     @GetMapping("/categories")
     public ResponseEntity<List<CategoryData>> listCategories(){

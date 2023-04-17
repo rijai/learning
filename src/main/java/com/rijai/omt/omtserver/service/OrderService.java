@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface OrderService {
     OrderData create(OrderData orderData);
     List<OrderData> getOrders(int customerId);
-    Optional<OrderData>  get(int orderId);
+    OrderData  get(int orderId);
     OrderData update(OrderData orderData);
     void delete(int orderId);
 }

@@ -1,5 +1,6 @@
 package com.rijai.omt.omtserver.service.impl;
 
+import com.rijai.omt.omtserver.OrderStatus;
 import com.rijai.omt.omtserver.data.OrderData;
 import com.rijai.omt.omtserver.repository.OrderRepository;
 import com.rijai.omt.omtserver.service.OrderService;
@@ -14,6 +15,7 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
     @Override
     public OrderData create(OrderData orderData) {
+        orderData.setStatus(OrderStatus.Created);
         return orderRepository.save(orderData);
     }
 
@@ -23,8 +25,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<OrderData> get(int orderId) {
-        return orderRepository.findById(orderId);
+    public OrderData get(int orderId) {
+        Optional<OrderData>  orderData = orderRepository.findById(orderId);
+        if(orderData.isEmpty()){
+            return null;
+        }
+        else {
+            return orderData.get();
+        }
     }
 
     @Override

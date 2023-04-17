@@ -16,6 +16,7 @@ public class ItemServiceImpl implements ItemService {
     ItemRepository itemRepository;
     @Override
     public ItemData create(ItemData itemData) {
+
         return  itemRepository.save(itemData);
     }
 
@@ -26,8 +27,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Optional<ItemData> get(int itemId) {
-        return itemRepository.findById(itemId);
+    public ItemData get(int itemId) {
+        Optional<ItemData> itemData =  itemRepository.findById(itemId);
+        if(itemData.isEmpty()){
+            return null;
+        }
+        else{
+            return itemData.get();
+        }
     }
 
     @Override
