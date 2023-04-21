@@ -7,6 +7,7 @@ import com.rijai.omt.omtserver.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -15,6 +16,7 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
     @Override
     public OrderData create(OrderData orderData) {
+        orderData.setDateOrdered(new Date());
         orderData.setStatus(OrderStatus.Created);
         return orderRepository.save(orderData);
     }

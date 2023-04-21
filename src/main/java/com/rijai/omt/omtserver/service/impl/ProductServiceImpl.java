@@ -30,6 +30,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductData> getProducts() {
+        List<ProductData> productList = new ArrayList<>();
+        productRepository.findAll().forEach(productList::add);
+        return productList;
+    }
+
+    @Override
     public ProductData get(int productId) {
         Optional<ProductData> productData = productRepository.findById(productId);
         if(productData.isEmpty()){

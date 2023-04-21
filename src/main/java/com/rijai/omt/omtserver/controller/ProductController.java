@@ -30,6 +30,16 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(newProduct);
         }
     }
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductData>> listProducts(){
+        List<ProductData> products = new ArrayList<>();
+        try {
+            products = productService.getProducts();
+            return ResponseEntity.ok(products);
+        } catch(Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(products);
+        }
+    }
 
     @GetMapping("/{categoryId}/products")
     public ResponseEntity<List<ProductData>> listProducts(@PathVariable int categoryId){

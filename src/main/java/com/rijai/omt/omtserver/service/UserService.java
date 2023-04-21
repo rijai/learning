@@ -9,6 +9,8 @@ public interface UserService {
     UserData create(UserData userData);
     List<UserData> getUsers();
     UserData get(int userDataId);
+
+    UserData getUserByEmail(String email);
     UserData update(UserData userData);
     void delete(int itemId);
 }

@@ -55,18 +55,6 @@ public class InventoryController {
     }
 
     @GetMapping("/{productId}/inventories")
-    public ResponseEntity<List<InventoryData>> listInventoriesByProductId(@PathVariable int productId){
-        try {
-            List<InventoryData> inventories = inventoryService.getInventories(productId);
-            return ResponseEntity.ok(inventories);
-        } catch(Exception ex){
-            List<InventoryData> inventories = new ArrayList<>();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(inventories);
-        }
-    }
-
-
-    @GetMapping("/{productId}/inventories")
     public ResponseEntity<List<InventoryData>> getProductCategories(@PathVariable int productId)
     {
         var headers = new HttpHeaders();

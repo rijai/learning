@@ -1,22 +1,21 @@
 package com.rijai.omt.omtserver.controller;
 
-import com.rijai.omt.omtserver.data.InventoryData;
 import com.rijai.omt.omtserver.data.UserData;
 import com.rijai.omt.omtserver.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class UserController {
+    private static Logger logger = LogManager.getLogger(UserController.class);
 
     @Autowired
     UserService userService;
@@ -40,6 +39,18 @@ public class UserController {
             return ResponseEntity.ok(users);
         } catch(Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(users);
+        }
+    }
+
+    @GetMapping("/users/{email}")
+    public ResponseEntity<UserData> getUserByEmail(@PathVariable String email){
+        UserData user  = null;
+        logger.info("UserController::getUserByEmail Email: " + email);
+        try {
+            user = userService.getUserByEmail(email);
+            return ResponseEntity.ok(user);
+        } catch(Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user);
         }
     }
 }

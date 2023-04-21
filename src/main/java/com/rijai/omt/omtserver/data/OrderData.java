@@ -4,6 +4,7 @@ import com.rijai.omt.omtserver.OrderStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,4 +18,6 @@ public class OrderData {
     private int customerId;
 
     private OrderStatus status;
+
+    private Date dateOrdered;
 }

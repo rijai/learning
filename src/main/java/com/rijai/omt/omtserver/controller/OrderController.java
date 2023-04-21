@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,6 +28,7 @@ public class OrderController {
     public ResponseEntity<OrderData> create(@RequestBody OrderData orderData){
         OrderData newOrder = new OrderData();
         try {
+            orderData.setDateOrdered(new Date());
             newOrder = orderService.create(orderData);
             return ResponseEntity.ok(newOrder);
         }
